@@ -1,0 +1,12 @@
+[workspace]
+authors = ["VeloEmir <77229356+VeloEmir@users.noreply.github.com>"]
+channels = ["conda-forge"]
+name = "HelloHRI"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+go = ">=1.24.3,<2"
+grpcio-tools = ">=1.71.0,<2"

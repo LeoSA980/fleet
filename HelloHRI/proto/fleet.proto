@@ -1,0 +1,17 @@
+   syntax = "proto3";
+
+   package fleet;
+
+   option go_package = "github.com/LeoSA980/fleet/HelloHRI/proto;fleetpb";
+
+   service Fleet {
+     rpc SendCommand (CommandRequest) returns (CommandResponse);
+   }
+
+   message CommandRequest {
+     string command = 1;
+   }
+
+   message CommandResponse {
+     string output = 1;
+   }
