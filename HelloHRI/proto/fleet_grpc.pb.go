@@ -19,14 +19,27 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Fleet_SendCommand_FullMethodName = "/fleet.Fleet/SendCommand"
+	Fleet_SendText_FullMethodName     = "/fleet.Fleet/SendText"
+	Fleet_StartSpinner_FullMethodName = "/fleet.Fleet/StartSpinner"
+	Fleet_ShowHealth_FullMethodName   = "/fleet.Fleet/ShowHealth"
+	Fleet_Stop_FullMethodName         = "/fleet.Fleet/Stop"
+	Fleet_Exit_FullMethodName         = "/fleet.Fleet/Exit"
 )
 
 // FleetClient is the client API for Fleet service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type FleetClient interface {
-	SendCommand(ctx context.Context, in *CommandRequest, opts ...grpc.CallOption) (*CommandResponse, error)
+	// Command 1: send text
+	SendText(ctx context.Context, in *TextRequest, opts ...grpc.CallOption) (*TextResponse, error)
+	// Command 2: start spinner animation
+	StartSpinner(ctx context.Context, in *SpinnerRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SpinnerResponse], error)
+	// Command 3: display health card
+	ShowHealth(ctx context.Context, in *HealthRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[HealthCard], error)
+	// Stop current activity
+	Stop(ctx context.Context, in *StopRequest, opts ...grpc.CallOption) (*StopResponse, error)
+	// Exit server
+	Exit(ctx context.Context, in *ExitRequest, opts ...grpc.CallOption) (*ExitResponse, error)
 }
 
 type fleetClient struct {
@@ -37,10 +50,68 @@ func NewFleetClient(cc grpc.ClientConnInterface) FleetClient {
 	return &fleetClient{cc}
 }
 
-func (c *fleetClient) SendCommand(ctx context.Context, in *CommandRequest, opts ...grpc.CallOption) (*CommandResponse, error) {
+func (c *fleetClient) SendText(ctx context.Context, in *TextRequest, opts ...grpc.CallOption) (*TextResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CommandResponse)
-	err := c.cc.Invoke(ctx, Fleet_SendCommand_FullMethodName, in, out, cOpts...)
+	out := new(TextResponse)
+	err := c.cc.Invoke(ctx, Fleet_SendText_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fleetClient) StartSpinner(ctx context.Context, in *SpinnerRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SpinnerResponse], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Fleet_ServiceDesc.Streams[0], Fleet_StartSpinner_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[SpinnerRequest, SpinnerResponse]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type Fleet_StartSpinnerClient = grpc.ServerStreamingClient[SpinnerResponse]
+
+func (c *fleetClient) ShowHealth(ctx context.Context, in *HealthRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[HealthCard], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Fleet_ServiceDesc.Streams[1], Fleet_ShowHealth_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[HealthRequest, HealthCard]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type Fleet_ShowHealthClient = grpc.ServerStreamingClient[HealthCard]
+
+func (c *fleetClient) Stop(ctx context.Context, in *StopRequest, opts ...grpc.CallOption) (*StopResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StopResponse)
+	err := c.cc.Invoke(ctx, Fleet_Stop_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fleetClient) Exit(ctx context.Context, in *ExitRequest, opts ...grpc.CallOption) (*ExitResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExitResponse)
+	err := c.cc.Invoke(ctx, Fleet_Exit_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +122,16 @@ func (c *fleetClient) SendCommand(ctx context.Context, in *CommandRequest, opts 
 // All implementations must embed UnimplementedFleetServer
 // for forward compatibility.
 type FleetServer interface {
-	SendCommand(context.Context, *CommandRequest) (*CommandResponse, error)
+	// Command 1: send text
+	SendText(context.Context, *TextRequest) (*TextResponse, error)
+	// Command 2: start spinner animation
+	StartSpinner(*SpinnerRequest, grpc.ServerStreamingServer[SpinnerResponse]) error
+	// Command 3: display health card
+	ShowHealth(*HealthRequest, grpc.ServerStreamingServer[HealthCard]) error
+	// Stop current activity
+	Stop(context.Context, *StopRequest) (*StopResponse, error)
+	// Exit server
+	Exit(context.Context, *ExitRequest) (*ExitResponse, error)
 	mustEmbedUnimplementedFleetServer()
 }
 
@@ -62,8 +142,20 @@ type FleetServer interface {
 // pointer dereference when methods are called.
 type UnimplementedFleetServer struct{}
 
-func (UnimplementedFleetServer) SendCommand(context.Context, *CommandRequest) (*CommandResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SendCommand not implemented")
+func (UnimplementedFleetServer) SendText(context.Context, *TextRequest) (*TextResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendText not implemented")
+}
+func (UnimplementedFleetServer) StartSpinner(*SpinnerRequest, grpc.ServerStreamingServer[SpinnerResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method StartSpinner not implemented")
+}
+func (UnimplementedFleetServer) ShowHealth(*HealthRequest, grpc.ServerStreamingServer[HealthCard]) error {
+	return status.Errorf(codes.Unimplemented, "method ShowHealth not implemented")
+}
+func (UnimplementedFleetServer) Stop(context.Context, *StopRequest) (*StopResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Stop not implemented")
+}
+func (UnimplementedFleetServer) Exit(context.Context, *ExitRequest) (*ExitResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Exit not implemented")
 }
 func (UnimplementedFleetServer) mustEmbedUnimplementedFleetServer() {}
 func (UnimplementedFleetServer) testEmbeddedByValue()               {}
@@ -86,20 +178,78 @@ func RegisterFleetServer(s grpc.ServiceRegistrar, srv FleetServer) {
 	s.RegisterService(&Fleet_ServiceDesc, srv)
 }
 
-func _Fleet_SendCommand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CommandRequest)
+func _Fleet_SendText_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TextRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FleetServer).SendCommand(ctx, in)
+		return srv.(FleetServer).SendText(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Fleet_SendCommand_FullMethodName,
+		FullMethod: Fleet_SendText_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FleetServer).SendCommand(ctx, req.(*CommandRequest))
+		return srv.(FleetServer).SendText(ctx, req.(*TextRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Fleet_StartSpinner_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(SpinnerRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(FleetServer).StartSpinner(m, &grpc.GenericServerStream[SpinnerRequest, SpinnerResponse]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type Fleet_StartSpinnerServer = grpc.ServerStreamingServer[SpinnerResponse]
+
+func _Fleet_ShowHealth_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(HealthRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(FleetServer).ShowHealth(m, &grpc.GenericServerStream[HealthRequest, HealthCard]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type Fleet_ShowHealthServer = grpc.ServerStreamingServer[HealthCard]
+
+func _Fleet_Stop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StopRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FleetServer).Stop(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Fleet_Stop_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FleetServer).Stop(ctx, req.(*StopRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Fleet_Exit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExitRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FleetServer).Exit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Fleet_Exit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FleetServer).Exit(ctx, req.(*ExitRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -112,10 +262,29 @@ var Fleet_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*FleetServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SendCommand",
-			Handler:    _Fleet_SendCommand_Handler,
+			MethodName: "SendText",
+			Handler:    _Fleet_SendText_Handler,
+		},
+		{
+			MethodName: "Stop",
+			Handler:    _Fleet_Stop_Handler,
+		},
+		{
+			MethodName: "Exit",
+			Handler:    _Fleet_Exit_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "StartSpinner",
+			Handler:       _Fleet_StartSpinner_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ShowHealth",
+			Handler:       _Fleet_ShowHealth_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "fleet.proto",
 }

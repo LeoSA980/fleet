@@ -5,13 +5,63 @@
    option go_package = "HelloHRI/proto;fleetpb";
 
    service Fleet {
-     rpc SendCommand (CommandRequest) returns (CommandResponse);
+     // Command 1: send text
+     rpc SendText (TextRequest) returns (TextResponse);
+     // Command 2: start spinner animation
+     rpc StartSpinner (SpinnerRequest) returns (stream SpinnerResponse);
+     // Command 3: display health card
+     rpc ShowHealth (HealthRequest) returns (stream HealthCard);
+     // Stop current activity
+     rpc Stop (StopRequest) returns (StopResponse);
+     // Exit server
+     rpc Exit (ExitRequest) returns (ExitResponse);
    }
 
-   message CommandRequest {
-     string command = 1;
+   message TextRequest {
+     string text = 1;
    }
 
-   message CommandResponse {
-     string output = 1;
+   message TextResponse {
+     string result = 1;
+   }
+
+   message SpinnerRequest {}
+
+   message SpinnerResponse {
+     string frame = 1;
+     bool finished = 2;
+   }
+
+   message HealthRequest {}
+
+   message HealthCard {
+     HealthStatus health = 1;
+     ConnectionStatus connection = 2;
+     string robot_ascii = 3;
+   }
+
+   message HealthStatus {
+     string status = 1; // "ok", "warn", "error"
+     float cpu = 2;
+     float mem = 3;
+     float current = 4;
+     string uptime = 5;
+   }
+
+   message ConnectionStatus {
+     float rtt = 1;
+     float jitter = 2;
+     bool connected = 3;
+   }
+
+   message StopRequest {}
+
+   message StopResponse {
+     string result = 1;
+   }
+
+   message ExitRequest {}
+
+   message ExitResponse {
+     string result = 1;
    }

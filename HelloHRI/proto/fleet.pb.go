@@ -21,27 +21,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type CommandRequest struct {
+type TextRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Command       string                 `protobuf:"bytes,1,opt,name=command,proto3" json:"command,omitempty"`
+	Text          string                 `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CommandRequest) Reset() {
-	*x = CommandRequest{}
+func (x *TextRequest) Reset() {
+	*x = TextRequest{}
 	mi := &file_fleet_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CommandRequest) String() string {
+func (x *TextRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CommandRequest) ProtoMessage() {}
+func (*TextRequest) ProtoMessage() {}
 
-func (x *CommandRequest) ProtoReflect() protoreflect.Message {
+func (x *TextRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_fleet_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -53,39 +53,39 @@ func (x *CommandRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CommandRequest.ProtoReflect.Descriptor instead.
-func (*CommandRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use TextRequest.ProtoReflect.Descriptor instead.
+func (*TextRequest) Descriptor() ([]byte, []int) {
 	return file_fleet_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *CommandRequest) GetCommand() string {
+func (x *TextRequest) GetText() string {
 	if x != nil {
-		return x.Command
+		return x.Text
 	}
 	return ""
 }
 
-type CommandResponse struct {
+type TextResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Output        string                 `protobuf:"bytes,1,opt,name=output,proto3" json:"output,omitempty"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CommandResponse) Reset() {
-	*x = CommandResponse{}
+func (x *TextResponse) Reset() {
+	*x = TextResponse{}
 	mi := &file_fleet_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CommandResponse) String() string {
+func (x *TextResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CommandResponse) ProtoMessage() {}
+func (*TextResponse) ProtoMessage() {}
 
-func (x *CommandResponse) ProtoReflect() protoreflect.Message {
+func (x *TextResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_fleet_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -97,14 +97,494 @@ func (x *CommandResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CommandResponse.ProtoReflect.Descriptor instead.
-func (*CommandResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use TextResponse.ProtoReflect.Descriptor instead.
+func (*TextResponse) Descriptor() ([]byte, []int) {
 	return file_fleet_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CommandResponse) GetOutput() string {
+func (x *TextResponse) GetResult() string {
 	if x != nil {
-		return x.Output
+		return x.Result
+	}
+	return ""
+}
+
+type SpinnerRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SpinnerRequest) Reset() {
+	*x = SpinnerRequest{}
+	mi := &file_fleet_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SpinnerRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SpinnerRequest) ProtoMessage() {}
+
+func (x *SpinnerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_fleet_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SpinnerRequest.ProtoReflect.Descriptor instead.
+func (*SpinnerRequest) Descriptor() ([]byte, []int) {
+	return file_fleet_proto_rawDescGZIP(), []int{2}
+}
+
+type SpinnerResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Frame         string                 `protobuf:"bytes,1,opt,name=frame,proto3" json:"frame,omitempty"`
+	Finished      bool                   `protobuf:"varint,2,opt,name=finished,proto3" json:"finished,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SpinnerResponse) Reset() {
+	*x = SpinnerResponse{}
+	mi := &file_fleet_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SpinnerResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SpinnerResponse) ProtoMessage() {}
+
+func (x *SpinnerResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_fleet_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SpinnerResponse.ProtoReflect.Descriptor instead.
+func (*SpinnerResponse) Descriptor() ([]byte, []int) {
+	return file_fleet_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *SpinnerResponse) GetFrame() string {
+	if x != nil {
+		return x.Frame
+	}
+	return ""
+}
+
+func (x *SpinnerResponse) GetFinished() bool {
+	if x != nil {
+		return x.Finished
+	}
+	return false
+}
+
+type HealthRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HealthRequest) Reset() {
+	*x = HealthRequest{}
+	mi := &file_fleet_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HealthRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HealthRequest) ProtoMessage() {}
+
+func (x *HealthRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_fleet_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HealthRequest.ProtoReflect.Descriptor instead.
+func (*HealthRequest) Descriptor() ([]byte, []int) {
+	return file_fleet_proto_rawDescGZIP(), []int{4}
+}
+
+type HealthCard struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Health        *HealthStatus          `protobuf:"bytes,1,opt,name=health,proto3" json:"health,omitempty"`
+	Connection    *ConnectionStatus      `protobuf:"bytes,2,opt,name=connection,proto3" json:"connection,omitempty"`
+	RobotAscii    string                 `protobuf:"bytes,3,opt,name=robot_ascii,json=robotAscii,proto3" json:"robot_ascii,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HealthCard) Reset() {
+	*x = HealthCard{}
+	mi := &file_fleet_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HealthCard) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HealthCard) ProtoMessage() {}
+
+func (x *HealthCard) ProtoReflect() protoreflect.Message {
+	mi := &file_fleet_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HealthCard.ProtoReflect.Descriptor instead.
+func (*HealthCard) Descriptor() ([]byte, []int) {
+	return file_fleet_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *HealthCard) GetHealth() *HealthStatus {
+	if x != nil {
+		return x.Health
+	}
+	return nil
+}
+
+func (x *HealthCard) GetConnection() *ConnectionStatus {
+	if x != nil {
+		return x.Connection
+	}
+	return nil
+}
+
+func (x *HealthCard) GetRobotAscii() string {
+	if x != nil {
+		return x.RobotAscii
+	}
+	return ""
+}
+
+type HealthStatus struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"` // "ok", "warn", "error"
+	Cpu           float32                `protobuf:"fixed32,2,opt,name=cpu,proto3" json:"cpu,omitempty"`
+	Mem           float32                `protobuf:"fixed32,3,opt,name=mem,proto3" json:"mem,omitempty"`
+	Current       float32                `protobuf:"fixed32,4,opt,name=current,proto3" json:"current,omitempty"`
+	Uptime        string                 `protobuf:"bytes,5,opt,name=uptime,proto3" json:"uptime,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HealthStatus) Reset() {
+	*x = HealthStatus{}
+	mi := &file_fleet_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HealthStatus) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HealthStatus) ProtoMessage() {}
+
+func (x *HealthStatus) ProtoReflect() protoreflect.Message {
+	mi := &file_fleet_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HealthStatus.ProtoReflect.Descriptor instead.
+func (*HealthStatus) Descriptor() ([]byte, []int) {
+	return file_fleet_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *HealthStatus) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *HealthStatus) GetCpu() float32 {
+	if x != nil {
+		return x.Cpu
+	}
+	return 0
+}
+
+func (x *HealthStatus) GetMem() float32 {
+	if x != nil {
+		return x.Mem
+	}
+	return 0
+}
+
+func (x *HealthStatus) GetCurrent() float32 {
+	if x != nil {
+		return x.Current
+	}
+	return 0
+}
+
+func (x *HealthStatus) GetUptime() string {
+	if x != nil {
+		return x.Uptime
+	}
+	return ""
+}
+
+type ConnectionStatus struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Rtt           float32                `protobuf:"fixed32,1,opt,name=rtt,proto3" json:"rtt,omitempty"`
+	Jitter        float32                `protobuf:"fixed32,2,opt,name=jitter,proto3" json:"jitter,omitempty"`
+	Connected     bool                   `protobuf:"varint,3,opt,name=connected,proto3" json:"connected,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConnectionStatus) Reset() {
+	*x = ConnectionStatus{}
+	mi := &file_fleet_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConnectionStatus) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConnectionStatus) ProtoMessage() {}
+
+func (x *ConnectionStatus) ProtoReflect() protoreflect.Message {
+	mi := &file_fleet_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConnectionStatus.ProtoReflect.Descriptor instead.
+func (*ConnectionStatus) Descriptor() ([]byte, []int) {
+	return file_fleet_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ConnectionStatus) GetRtt() float32 {
+	if x != nil {
+		return x.Rtt
+	}
+	return 0
+}
+
+func (x *ConnectionStatus) GetJitter() float32 {
+	if x != nil {
+		return x.Jitter
+	}
+	return 0
+}
+
+func (x *ConnectionStatus) GetConnected() bool {
+	if x != nil {
+		return x.Connected
+	}
+	return false
+}
+
+type StopRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StopRequest) Reset() {
+	*x = StopRequest{}
+	mi := &file_fleet_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StopRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StopRequest) ProtoMessage() {}
+
+func (x *StopRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_fleet_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StopRequest.ProtoReflect.Descriptor instead.
+func (*StopRequest) Descriptor() ([]byte, []int) {
+	return file_fleet_proto_rawDescGZIP(), []int{8}
+}
+
+type StopResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StopResponse) Reset() {
+	*x = StopResponse{}
+	mi := &file_fleet_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StopResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StopResponse) ProtoMessage() {}
+
+func (x *StopResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_fleet_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StopResponse.ProtoReflect.Descriptor instead.
+func (*StopResponse) Descriptor() ([]byte, []int) {
+	return file_fleet_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *StopResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type ExitRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExitRequest) Reset() {
+	*x = ExitRequest{}
+	mi := &file_fleet_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExitRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExitRequest) ProtoMessage() {}
+
+func (x *ExitRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_fleet_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExitRequest.ProtoReflect.Descriptor instead.
+func (*ExitRequest) Descriptor() ([]byte, []int) {
+	return file_fleet_proto_rawDescGZIP(), []int{10}
+}
+
+type ExitResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExitResponse) Reset() {
+	*x = ExitResponse{}
+	mi := &file_fleet_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExitResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExitResponse) ProtoMessage() {}
+
+func (x *ExitResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_fleet_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExitResponse.ProtoReflect.Descriptor instead.
+func (*ExitResponse) Descriptor() ([]byte, []int) {
+	return file_fleet_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ExitResponse) GetResult() string {
+	if x != nil {
+		return x.Result
 	}
 	return ""
 }
@@ -113,13 +593,47 @@ var File_fleet_proto protoreflect.FileDescriptor
 
 const file_fleet_proto_rawDesc = "" +
 	"\n" +
-	"\vfleet.proto\x12\x05fleet\"*\n" +
-	"\x0eCommandRequest\x12\x18\n" +
-	"\acommand\x18\x01 \x01(\tR\acommand\")\n" +
-	"\x0fCommandResponse\x12\x16\n" +
-	"\x06output\x18\x01 \x01(\tR\x06output2E\n" +
-	"\x05Fleet\x12<\n" +
-	"\vSendCommand\x12\x15.fleet.CommandRequest\x1a\x16.fleet.CommandResponseB\x18Z\x16HelloHRI/proto;fleetpbb\x06proto3"
+	"\vfleet.proto\x12\x05fleet\"!\n" +
+	"\vTextRequest\x12\x12\n" +
+	"\x04text\x18\x01 \x01(\tR\x04text\"&\n" +
+	"\fTextResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x10\n" +
+	"\x0eSpinnerRequest\"C\n" +
+	"\x0fSpinnerResponse\x12\x14\n" +
+	"\x05frame\x18\x01 \x01(\tR\x05frame\x12\x1a\n" +
+	"\bfinished\x18\x02 \x01(\bR\bfinished\"\x0f\n" +
+	"\rHealthRequest\"\x93\x01\n" +
+	"\n" +
+	"HealthCard\x12+\n" +
+	"\x06health\x18\x01 \x01(\v2\x13.fleet.HealthStatusR\x06health\x127\n" +
+	"\n" +
+	"connection\x18\x02 \x01(\v2\x17.fleet.ConnectionStatusR\n" +
+	"connection\x12\x1f\n" +
+	"\vrobot_ascii\x18\x03 \x01(\tR\n" +
+	"robotAscii\"|\n" +
+	"\fHealthStatus\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\x12\x10\n" +
+	"\x03cpu\x18\x02 \x01(\x02R\x03cpu\x12\x10\n" +
+	"\x03mem\x18\x03 \x01(\x02R\x03mem\x12\x18\n" +
+	"\acurrent\x18\x04 \x01(\x02R\acurrent\x12\x16\n" +
+	"\x06uptime\x18\x05 \x01(\tR\x06uptime\"Z\n" +
+	"\x10ConnectionStatus\x12\x10\n" +
+	"\x03rtt\x18\x01 \x01(\x02R\x03rtt\x12\x16\n" +
+	"\x06jitter\x18\x02 \x01(\x02R\x06jitter\x12\x1c\n" +
+	"\tconnected\x18\x03 \x01(\bR\tconnected\"\r\n" +
+	"\vStopRequest\"&\n" +
+	"\fStopResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\r\n" +
+	"\vExitRequest\"&\n" +
+	"\fExitResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result2\x98\x02\n" +
+	"\x05Fleet\x123\n" +
+	"\bSendText\x12\x12.fleet.TextRequest\x1a\x13.fleet.TextResponse\x12?\n" +
+	"\fStartSpinner\x12\x15.fleet.SpinnerRequest\x1a\x16.fleet.SpinnerResponse0\x01\x127\n" +
+	"\n" +
+	"ShowHealth\x12\x14.fleet.HealthRequest\x1a\x11.fleet.HealthCard0\x01\x12/\n" +
+	"\x04Stop\x12\x12.fleet.StopRequest\x1a\x13.fleet.StopResponse\x12/\n" +
+	"\x04Exit\x12\x12.fleet.ExitRequest\x1a\x13.fleet.ExitResponseB\x18Z\x16HelloHRI/proto;fleetpbb\x06proto3"
 
 var (
 	file_fleet_proto_rawDescOnce sync.Once
@@ -133,19 +647,39 @@ func file_fleet_proto_rawDescGZIP() []byte {
 	return file_fleet_proto_rawDescData
 }
 
-var file_fleet_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_fleet_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_fleet_proto_goTypes = []any{
-	(*CommandRequest)(nil),  // 0: fleet.CommandRequest
-	(*CommandResponse)(nil), // 1: fleet.CommandResponse
+	(*TextRequest)(nil),      // 0: fleet.TextRequest
+	(*TextResponse)(nil),     // 1: fleet.TextResponse
+	(*SpinnerRequest)(nil),   // 2: fleet.SpinnerRequest
+	(*SpinnerResponse)(nil),  // 3: fleet.SpinnerResponse
+	(*HealthRequest)(nil),    // 4: fleet.HealthRequest
+	(*HealthCard)(nil),       // 5: fleet.HealthCard
+	(*HealthStatus)(nil),     // 6: fleet.HealthStatus
+	(*ConnectionStatus)(nil), // 7: fleet.ConnectionStatus
+	(*StopRequest)(nil),      // 8: fleet.StopRequest
+	(*StopResponse)(nil),     // 9: fleet.StopResponse
+	(*ExitRequest)(nil),      // 10: fleet.ExitRequest
+	(*ExitResponse)(nil),     // 11: fleet.ExitResponse
 }
 var file_fleet_proto_depIdxs = []int32{
-	0, // 0: fleet.Fleet.SendCommand:input_type -> fleet.CommandRequest
-	1, // 1: fleet.Fleet.SendCommand:output_type -> fleet.CommandResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	6,  // 0: fleet.HealthCard.health:type_name -> fleet.HealthStatus
+	7,  // 1: fleet.HealthCard.connection:type_name -> fleet.ConnectionStatus
+	0,  // 2: fleet.Fleet.SendText:input_type -> fleet.TextRequest
+	2,  // 3: fleet.Fleet.StartSpinner:input_type -> fleet.SpinnerRequest
+	4,  // 4: fleet.Fleet.ShowHealth:input_type -> fleet.HealthRequest
+	8,  // 5: fleet.Fleet.Stop:input_type -> fleet.StopRequest
+	10, // 6: fleet.Fleet.Exit:input_type -> fleet.ExitRequest
+	1,  // 7: fleet.Fleet.SendText:output_type -> fleet.TextResponse
+	3,  // 8: fleet.Fleet.StartSpinner:output_type -> fleet.SpinnerResponse
+	5,  // 9: fleet.Fleet.ShowHealth:output_type -> fleet.HealthCard
+	9,  // 10: fleet.Fleet.Stop:output_type -> fleet.StopResponse
+	11, // 11: fleet.Fleet.Exit:output_type -> fleet.ExitResponse
+	7,  // [7:12] is the sub-list for method output_type
+	2,  // [2:7] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_fleet_proto_init() }
@@ -159,7 +693,7 @@ func file_fleet_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_fleet_proto_rawDesc), len(file_fleet_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
