@@ -4,14 +4,15 @@ import (
 	"bufio"
 	"context"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"strings"
 	"time"
 
-	pb "github.com/LeoSA980/fleet/HelloHRI/proto"
+	pb "HelloHRI/proto"
+
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 	"gopkg.in/yaml.v3"
 )
 
@@ -24,7 +25,7 @@ type Config struct {
 
 func main() {
 	// Чтение конфига
-	configData, err := ioutil.ReadFile("../config.yaml")
+	configData, err := os.ReadFile("../config.yaml")
 	if err != nil {
 		log.Fatalf("Failed to read config.yaml: %v", err)
 	}
@@ -34,7 +35,7 @@ func main() {
 	}
 	addr := fmt.Sprintf("%s:%d", cfg.Grpc.Host, cfg.Grpc.Port)
 
-	conn, err := grpc.Dial(addr, grpc.WithInsecure())
+	conn, err := grpc.Dial(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}

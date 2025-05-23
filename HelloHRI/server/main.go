@@ -3,12 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net"
 	"os"
 
-	pb "github.com/LeoSA980/fleet/HelloHRI/proto"
+	pb "HelloHRI/proto"
+
 	"google.golang.org/grpc"
 	"gopkg.in/yaml.v3"
 )
@@ -37,7 +37,7 @@ func (s *server) SendCommand(ctx context.Context, req *pb.CommandRequest) (*pb.C
 
 func main() {
 	// Reading config
-	configData, err := ioutil.ReadFile("../config.yaml")
+	configData, err := os.ReadFile("../config.yaml")
 	if err != nil {
 		log.Fatalf("Failed to read config.yaml: %v", err)
 	}

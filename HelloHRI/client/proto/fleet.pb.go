@@ -119,7 +119,7 @@ const file_proto_fleet_proto_rawDesc = "" +
 	"\x0fCommandResponse\x12\x16\n" +
 	"\x06output\x18\x01 \x01(\tR\x06output2E\n" +
 	"\x05Fleet\x12<\n" +
-	"\vSendCommand\x12\x15.fleet.CommandRequest\x1a\x16.fleet.CommandResponseB2Z0github.com/LeoSA980/fleet/HelloHRI/proto;fleetpbb\x06proto3"
+	"\vSendCommand\x12\x15.fleet.CommandRequest\x1a\x16.fleet.CommandResponseB\x11Z\x0f./proto;fleetpbb\x06proto3"
 
 var (
 	file_proto_fleet_proto_rawDescOnce sync.Once

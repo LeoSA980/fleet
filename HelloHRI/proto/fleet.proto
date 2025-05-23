@@ -2,7 +2,7 @@
 
    package fleet;
 
-   option go_package = "github.com/LeoSA980/fleet/HelloHRI/proto;fleetpb";
+   option go_package = "HelloHRI/proto;fleetpb";
 
    service Fleet {
      rpc SendCommand (CommandRequest) returns (CommandResponse);

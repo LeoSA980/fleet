@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v5.29.3
-// source: proto/fleet.proto
+// source: fleet.proto
 
 package fleetpb
 
@@ -30,7 +30,7 @@ type CommandRequest struct {
 
 func (x *CommandRequest) Reset() {
 	*x = CommandRequest{}
-	mi := &file_proto_fleet_proto_msgTypes[0]
+	mi := &file_fleet_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -42,7 +42,7 @@ func (x *CommandRequest) String() string {
 func (*CommandRequest) ProtoMessage() {}
 
 func (x *CommandRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_fleet_proto_msgTypes[0]
+	mi := &file_fleet_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -55,7 +55,7 @@ func (x *CommandRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CommandRequest.ProtoReflect.Descriptor instead.
 func (*CommandRequest) Descriptor() ([]byte, []int) {
-	return file_proto_fleet_proto_rawDescGZIP(), []int{0}
+	return file_fleet_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *CommandRequest) GetCommand() string {
@@ -74,7 +74,7 @@ type CommandResponse struct {
 
 func (x *CommandResponse) Reset() {
 	*x = CommandResponse{}
-	mi := &file_proto_fleet_proto_msgTypes[1]
+	mi := &file_fleet_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -86,7 +86,7 @@ func (x *CommandResponse) String() string {
 func (*CommandResponse) ProtoMessage() {}
 
 func (x *CommandResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_fleet_proto_msgTypes[1]
+	mi := &file_fleet_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -99,7 +99,7 @@ func (x *CommandResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CommandResponse.ProtoReflect.Descriptor instead.
 func (*CommandResponse) Descriptor() ([]byte, []int) {
-	return file_proto_fleet_proto_rawDescGZIP(), []int{1}
+	return file_fleet_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *CommandResponse) GetOutput() string {
@@ -109,36 +109,36 @@ func (x *CommandResponse) GetOutput() string {
 	return ""
 }
 
-var File_proto_fleet_proto protoreflect.FileDescriptor
+var File_fleet_proto protoreflect.FileDescriptor
 
-const file_proto_fleet_proto_rawDesc = "" +
+const file_fleet_proto_rawDesc = "" +
 	"\n" +
-	"\x11proto/fleet.proto\x12\x05fleet\"*\n" +
+	"\vfleet.proto\x12\x05fleet\"*\n" +
 	"\x0eCommandRequest\x12\x18\n" +
 	"\acommand\x18\x01 \x01(\tR\acommand\")\n" +
 	"\x0fCommandResponse\x12\x16\n" +
 	"\x06output\x18\x01 \x01(\tR\x06output2E\n" +
 	"\x05Fleet\x12<\n" +
-	"\vSendCommand\x12\x15.fleet.CommandRequest\x1a\x16.fleet.CommandResponseB2Z0github.com/LeoSA980/fleet/HelloHRI/proto;fleetpbb\x06proto3"
+	"\vSendCommand\x12\x15.fleet.CommandRequest\x1a\x16.fleet.CommandResponseB\x18Z\x16HelloHRI/proto;fleetpbb\x06proto3"
 
 var (
-	file_proto_fleet_proto_rawDescOnce sync.Once
-	file_proto_fleet_proto_rawDescData []byte
+	file_fleet_proto_rawDescOnce sync.Once
+	file_fleet_proto_rawDescData []byte
 )
 
-func file_proto_fleet_proto_rawDescGZIP() []byte {
-	file_proto_fleet_proto_rawDescOnce.Do(func() {
-		file_proto_fleet_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_fleet_proto_rawDesc), len(file_proto_fleet_proto_rawDesc)))
+func file_fleet_proto_rawDescGZIP() []byte {
+	file_fleet_proto_rawDescOnce.Do(func() {
+		file_fleet_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_fleet_proto_rawDesc), len(file_fleet_proto_rawDesc)))
 	})
-	return file_proto_fleet_proto_rawDescData
+	return file_fleet_proto_rawDescData
 }
 
-var file_proto_fleet_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_proto_fleet_proto_goTypes = []any{
+var file_fleet_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_fleet_proto_goTypes = []any{
 	(*CommandRequest)(nil),  // 0: fleet.CommandRequest
 	(*CommandResponse)(nil), // 1: fleet.CommandResponse
 }
-var file_proto_fleet_proto_depIdxs = []int32{
+var file_fleet_proto_depIdxs = []int32{
 	0, // 0: fleet.Fleet.SendCommand:input_type -> fleet.CommandRequest
 	1, // 1: fleet.Fleet.SendCommand:output_type -> fleet.CommandResponse
 	1, // [1:2] is the sub-list for method output_type
@@ -148,26 +148,26 @@ var file_proto_fleet_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_proto_fleet_proto_init() }
-func file_proto_fleet_proto_init() {
-	if File_proto_fleet_proto != nil {
+func init() { file_fleet_proto_init() }
+func file_fleet_proto_init() {
+	if File_fleet_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_fleet_proto_rawDesc), len(file_proto_fleet_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_fleet_proto_rawDesc), len(file_fleet_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_proto_fleet_proto_goTypes,
-		DependencyIndexes: file_proto_fleet_proto_depIdxs,
-		MessageInfos:      file_proto_fleet_proto_msgTypes,
+		GoTypes:           file_fleet_proto_goTypes,
+		DependencyIndexes: file_fleet_proto_depIdxs,
+		MessageInfos:      file_fleet_proto_msgTypes,
 	}.Build()
-	File_proto_fleet_proto = out.File
-	file_proto_fleet_proto_goTypes = nil
-	file_proto_fleet_proto_depIdxs = nil
+	File_fleet_proto = out.File
+	file_fleet_proto_goTypes = nil
+	file_fleet_proto_depIdxs = nil
 }

@@ -1,12 +1,15 @@
 [workspace]
-authors = ["VeloEmir <77229356+VeloEmir@users.noreply.github.com>"]
+authors = ["LeoSA980 <77229356+LeoSA980@users.noreply.github.com>"]
 channels = ["conda-forge"]
 name = "HelloHRI"
-platforms = ["osx-arm64"]
+platforms = ["osx-arm64", "linux-aarch64"]
 version = "0.1.0"
 
 [tasks]
+server = "cd server && go run main.go"
+client = "cd client && go run main.go"
 
 [dependencies]
 go = ">=1.24.3,<2"
 grpcio-tools = ">=1.71.0,<2"
+protobuf = "*"
